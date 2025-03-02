@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://245gp618f2jk"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_oyml1"]
+[ext_resource type="Theme" uid="uid://b1ebssvshg3qy" path="res://Themes/Menu.tres" id="2_7u5bu"]
+[ext_resource type="Script" path="res://Scripts/levels_scroll_container.gd" id="3_qfi84"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uaxlp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_huc1d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dd1qi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4klm8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mctfm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8od3i"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 1
+border_width_bottom = 1
+
+[node name="Menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oyml1")
+
+[node name="MainGrid" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -81.5
+offset_right = 100.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonTitle" type="Button" parent="MainGrid"]
+layout_mode = 2
+size_flags_vertical = 0
+focus_mode = 0
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uaxlp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_huc1d")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dd1qi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4klm8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mctfm")
+text = "C.A.R"
+
+[node name="ButtonLevels" type="Button" parent="MainGrid"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_7u5bu")
+text = "Levels"
+
+[node name="LevelsScrollContainer" type="ScrollContainer" parent="MainGrid"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8od3i")
+vertical_scroll_mode = 0
+script = ExtResource("3_qfi84")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainGrid/LevelsScrollContainer"]
+layout_mode = 2
+
+[node name="ButtonSettings" type="Button" parent="MainGrid"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_7u5bu")
+text = "Settings"
+
+[node name="ButtonQuit" type="Button" parent="MainGrid"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_7u5bu")
+text = "Quit"
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "version"
+
+[connection signal="pressed" from="MainGrid/ButtonTitle" to="." method="_on_button_title_pressed"]
+[connection signal="toggled" from="MainGrid/ButtonTitle" to="." method="_on_button_title_toggled"]
+[connection signal="pressed" from="MainGrid/ButtonLevels" to="." method="_on_button_levels_pressed"]
+[connection signal="pressed" from="MainGrid/ButtonSettings" to="." method="_on_button_settings_pressed"]
+[connection signal="pressed" from="MainGrid/ButtonQuit" to="." method="_on_button_quit_pressed"]

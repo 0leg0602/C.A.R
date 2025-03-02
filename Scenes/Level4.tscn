@@ -1,0 +1,240 @@
+[gd_scene load_steps=25 format=3 uid="uid://dhgvje6umqvc0"]
+
+[ext_resource type="Script" path="res://Scripts/level4.gd" id="1_ogvru"]
+[ext_resource type="Texture2D" uid="uid://cq4c088pf1qr7" path="res://textures/A&B.png" id="2_dutxp"]
+[ext_resource type="Texture2D" uid="uid://bifv05ee468j8" path="res://textures/chess.png" id="2_nk1jm"]
+[ext_resource type="Material" uid="uid://cejodv6vvwjst" path="res://textures/MainTexture.tres" id="2_rk187"]
+[ext_resource type="Texture2D" uid="uid://b1kjnqe6gh0m3" path="res://textures/lock.svg" id="5_w44ce"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_12tsu"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
+sky_energy_multiplier = 0.0
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_uyhex"]
+sky_material = SubResource("ProceduralSkyMaterial_12tsu")
+
+[sub_resource type="Environment" id="Environment_xix48"]
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_uyhex")
+glow_enabled = true
+glow_intensity = 8.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_valwt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3f3vk"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_topti"]
+next_pass = SubResource("StandardMaterial3D_3f3vk")
+transparency = 1
+albedo_texture = ExtResource("2_dutxp")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_thxjj"]
+material = SubResource("StandardMaterial3D_topti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hpab"]
+albedo_texture = ExtResource("2_nk1jm")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pw2q"]
+material = SubResource("StandardMaterial3D_7hpab")
+size = Vector3(100, 1, 81)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x47ao"]
+size = Vector3(100, 1, 81)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xe1ul"]
+size = Vector3(550, 1, 550)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ft1ti"]
+size = Vector3(7, 1, 1)
+
+[sub_resource type="Animation" id="Animation_h84vu"]
+resource_name = "Door1Disintegration"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door1/MeshInstance3D:mesh:material:emission_energy_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 5.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ball1/MeshInstance3D:mesh:material:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 5.0]
+}
+
+[sub_resource type="Animation" id="Animation_hrksc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door1/MeshInstance3D:mesh:material:emission_energy_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ball1/MeshInstance3D:mesh:material:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ium3"]
+_data = {
+"Door1Disintegration": SubResource("Animation_h84vu"),
+"RESET": SubResource("Animation_hrksc")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ckjd"]
+size = Vector3(0.25, 6, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mw3j4"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_s8n02"]
+material = SubResource("StandardMaterial3D_mw3j4")
+size = Vector3(0.25, 6, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_paeyo"]
+size = Vector3(0.3, 6, 9.1)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_ogvru")
+metadata/level_name = "level4"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xix48")
+
+[node name="SpotLight0" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+spot_range = 6.72384
+
+[node name="OmniLightBulb" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+visible = false
+omni_range = 167.767
+
+[node name="Ball1" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.1, 35)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball1"]
+shape = SubResource("SphereShape3D_valwt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball1"]
+mesh = SubResource("SphereMesh_thxjj")
+
+[node name="ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+material_override = ExtResource("2_rk187")
+mesh = SubResource("BoxMesh_8pw2q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+shape = SubResource("BoxShape3D_x47ao")
+
+[node name="TriggerGameOver" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerGameOver"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19.3171, 0)
+shape = SubResource("BoxShape3D_xe1ul")
+
+[node name="SpotLight1" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 18)
+spot_range = 6.72384
+
+[node name="LightTrigger1" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 17)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightTrigger1"]
+shape = SubResource("BoxShape3D_ft1ti")
+
+[node name="SpotLight2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10, 12, 35)
+visible = false
+light_energy = 3.555
+spot_range = 21.0
+spot_angle = 50.4685
+
+[node name="SpotLight3" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 10, 12, 35)
+visible = false
+light_energy = 3.555
+spot_range = 21.0
+spot_angle = 50.4685
+
+[node name="DoorsAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7ium3")
+}
+
+[node name="Door1" type="StaticBody3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 3.4, 40.6)
+
+[node name="DoorSpotLight" type="SpotLight3D" parent="Door1"]
+transform = Transform3D(0, -0.965926, -0.258819, 0, -0.258819, 0.965926, -1, 0, 0, -2.93175, 3.47733, 0)
+visible = false
+spot_range = 9.0
+spot_angle = 50.4685
+
+[node name="Lock" type="Sprite3D" parent="Door1"]
+transform = Transform3D(-1.79217e-08, 0, 0.41, 0, 0.41, 0, -0.41, 0, -1.79217e-08, -0.129999, -0.615, 0)
+visible = false
+texture = ExtResource("5_w44ce")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door1"]
+transform = Transform3D(0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0, 0)
+shape = SubResource("BoxShape3D_3ckjd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door1"]
+mesh = SubResource("BoxMesh_s8n02")
+skeleton = NodePath("")
+
+[node name="DoorTrigger" type="Area3D" parent="Door1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door1/DoorTrigger"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+shape = SubResource("BoxShape3D_paeyo")
+
+[connection signal="body_entered" from="TriggerGameOver" to="." method="_on_trigger_game_over_body_entered"]
+[connection signal="body_entered" from="LightTrigger1" to="." method="_on_light_trigger_1_body_entered"]
+[connection signal="animation_finished" from="DoorsAnimation" to="." method="_on_doors_animation_animation_finished"]
+[connection signal="body_entered" from="Door1/DoorTrigger" to="." method="_on_door_trigger_body_entered"]

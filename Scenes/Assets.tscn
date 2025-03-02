@@ -1,0 +1,712 @@
+[gd_scene load_steps=30 format=3 uid="uid://ca18ovd7frxw6"]
+
+[ext_resource type="Script" path="res://Scripts/car.gd" id="1_v3ixg"]
+[ext_resource type="ArrayMesh" uid="uid://3cjxkhx04cmj" path="res://3d-models/key.obj" id="2_vpe1t"]
+[ext_resource type="Script" path="res://Scripts/cheats.gd" id="3_4jk0v"]
+[ext_resource type="Texture2D" uid="uid://mxc5bfih2py1" path="res://textures/wheel.png" id="3_li5la"]
+[ext_resource type="Script" path="res://Scripts/Control.gd" id="4_d2m5r"]
+[ext_resource type="Texture2D" uid="uid://cq0wwtkoph3sr" path="res://textures/arrowUP.png" id="5_kq257"]
+[ext_resource type="Texture2D" uid="uid://biyqrs11ovsab" path="res://textures/arrowAUP.png" id="6_6b4c7"]
+[ext_resource type="Texture2D" uid="uid://coebhvse3b4l1" path="res://textures/arrowDown.png" id="7_nmd1v"]
+[ext_resource type="Texture2D" uid="uid://bf8i1l7j0hlb8" path="res://textures/arrowADown.png" id="8_o8s3g"]
+[ext_resource type="Texture2D" uid="uid://cm46xucdqmgcg" path="res://textures/arrowLeft.png" id="9_8rrah"]
+[ext_resource type="Texture2D" uid="uid://3odcas5xues" path="res://textures/arrowALeft.png" id="10_2ye35"]
+[ext_resource type="Texture2D" uid="uid://ds7uscwn7tcxh" path="res://textures/arrow.png" id="11_4oucp"]
+[ext_resource type="Texture2D" uid="uid://sicfbnc07t87" path="res://textures/arrowA.png" id="12_g0878"]
+[ext_resource type="Texture2D" uid="uid://dnn7fy4pfuc7s" path="res://textures/Break.png" id="13_d3ylk"]
+[ext_resource type="Texture2D" uid="uid://cfid2bxmhm7xw" path="res://textures/BreakA.png" id="14_ria5o"]
+[ext_resource type="Texture2D" uid="uid://d0xqyab121hls" path="res://textures/Pause.png" id="15_ekgjg"]
+[ext_resource type="Texture2D" uid="uid://dvacwqm8m8smy" path="res://textures/PauseA.png" id="16_u31ax"]
+[ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="17_orhi4"]
+[ext_resource type="Theme" uid="uid://cotcbhb0703mf" path="res://Themes/PauseMenu.tres" id="18_2aus8"]
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="19_0i4sb"]
+[ext_resource type="Script" path="res://Scripts/KeybindSettings.gd" id="20_upc63"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgebt"]
+size = Vector3(0.4, 0.29, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhpw8"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_imtmb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j3c4j"]
+size = Vector3(1.5, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4n7kp"]
+size = Vector3(1.5, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qe74k"]
+albedo_texture = ExtResource("3_li5la")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uoid1"]
+material = SubResource("StandardMaterial3D_qe74k")
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrpug"]
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="Assets" type="Node3D"]
+
+[node name="Key" type="Node3D" parent="."]
+
+[node name="CollisionShape4Key" type="CollisionShape3D" parent="Key"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, -1.9)
+shape = SubResource("BoxShape3D_lgebt")
+
+[node name="Mesh4Key" type="MeshInstance3D" parent="Key"]
+transform = Transform3D(-4.80825e-10, 4.80825e-10, 0.011, 0.011, -4.80825e-10, 4.80825e-10, 4.80825e-10, 0.011, -4.80825e-10, 0, 0, -1.63756)
+mesh = ExtResource("2_vpe1t")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_nhpw8")
+
+[node name="Car" type="VehicleBody3D" parent="."]
+script = ExtResource("1_v3ixg")
+
+[node name="UI" type="Control" parent="Car"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Cheats" type="PanelContainer" parent="Car/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -87.0
+offset_bottom = 59.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_imtmb")
+script = ExtResource("3_4jk0v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Car/UI/Cheats"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Car/UI/Cheats/VBoxContainer"]
+layout_mode = 2
+text = "Cheats:"
+
+[node name="LevelLoader" type="HBoxContainer" parent="Car/UI/Cheats/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoadLevelLabel" type="Label" parent="Car/UI/Cheats/VBoxContainer/LevelLoader"]
+layout_mode = 2
+text = "Load Level:"
+
+[node name="LevelOptionButton" type="OptionButton" parent="Car/UI/Cheats/VBoxContainer/LevelLoader"]
+layout_mode = 2
+
+[node name="SetlevelButton" type="Button" parent="Car/UI/Cheats/VBoxContainer/LevelLoader"]
+layout_mode = 2
+text = "Set level"
+
+[node name="StopWatchLabel" type="Label" parent="Car/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+horizontal_alignment = 2
+
+[node name="Camera3D" type="Camera3D" parent="Car"]
+transform = Transform3D(-1, 4.37114e-08, -7.57104e-08, 0, 0.866025, 0.5, 8.74228e-08, 0.5, -0.866025, 0, 3, -5)
+
+[node name="CarBodyMesh" type="MeshInstance3D" parent="Car"]
+mesh = SubResource("BoxMesh_j3c4j")
+
+[node name="CarCollision" type="CollisionShape3D" parent="Car"]
+shape = SubResource("BoxShape3D_4n7kp")
+
+[node name="Left front" type="VehicleWheel3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 1, 0, 1)
+use_as_traction = true
+use_as_steering = true
+suspension_stiffness = 50.0
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/Left front"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uoid1")
+
+[node name="right front" type="VehicleWheel3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1.35, 0, 0, 0, 1.35, -1, 0, 1)
+use_as_traction = true
+use_as_steering = true
+suspension_stiffness = 50.0
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/right front"]
+transform = Transform3D(-4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, -3.82137e-15, 0, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uoid1")
+
+[node name="left back" type="VehicleWheel3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 1, 0, -1)
+use_as_traction = true
+suspension_stiffness = 50.0
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/left back"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uoid1")
+
+[node name="right back" type="VehicleWheel3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1.35, 0, 0, 0, 1.35, -1, 0, -1)
+use_as_traction = true
+suspension_stiffness = 50.0
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/right back"]
+transform = Transform3D(-4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, -3.82137e-15, 0, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uoid1")
+
+[node name="Controls" type="Control" parent="Car"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_d2m5r")
+
+[node name="Label" type="Label" parent="Car/Controls"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Test"
+horizontal_alignment = 1
+
+[node name="Forward" type="TouchScreenButton" parent="Car/Controls"]
+texture_normal = ExtResource("5_kq257")
+texture_pressed = ExtResource("6_6b4c7")
+
+[node name="Back" type="TouchScreenButton" parent="Car/Controls"]
+texture_normal = ExtResource("7_nmd1v")
+texture_pressed = ExtResource("8_o8s3g")
+
+[node name="Left" type="TouchScreenButton" parent="Car/Controls"]
+texture_normal = ExtResource("9_8rrah")
+texture_pressed = ExtResource("10_2ye35")
+
+[node name="Right" type="TouchScreenButton" parent="Car/Controls"]
+texture_normal = ExtResource("11_4oucp")
+texture_pressed = ExtResource("12_g0878")
+
+[node name="Break" type="TouchScreenButton" parent="Car/Controls"]
+texture_normal = ExtResource("13_d3ylk")
+texture_pressed = ExtResource("14_ria5o")
+
+[node name="Pause" type="TouchScreenButton" parent="Car/Controls"]
+texture_normal = ExtResource("15_ekgjg")
+texture_pressed = ExtResource("16_u31ax")
+
+[node name="PauseMenu" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("17_orhi4")
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.0784314)
+
+[node name="MainGrid" type="GridContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -30.5
+offset_right = 53.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusLabel" type="Label" parent="PauseMenu/MainGrid"]
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "GAME PAUSED"
+horizontal_alignment = 1
+
+[node name="TimeStatusLabel" type="Button" parent="PauseMenu/MainGrid"]
+visible = false
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+disabled = true
+text = "Level completed in 34 sec"
+
+[node name="ButtonContinue" type="Button" parent="PauseMenu/MainGrid"]
+visible = false
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+text = "Continue"
+
+[node name="ButtonResume" type="Button" parent="PauseMenu/MainGrid"]
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+text = "Resume"
+
+[node name="ButtonRestart" type="Button" parent="PauseMenu/MainGrid"]
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+text = "Restart"
+
+[node name="ButtonSettings" type="Button" parent="PauseMenu/MainGrid"]
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+text = "Settings"
+
+[node name="ButtonMainMenu" type="Button" parent="PauseMenu/MainGrid"]
+layout_mode = 2
+theme = ExtResource("18_2aus8")
+text = "To Main Menu"
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("19_0i4sb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -541.0
+offset_top = -209.0
+offset_right = 541.0
+offset_bottom = 209.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsLabel" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("18_2aus8")
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nrpug")
+current_tab = 0
+
+[node name="Controls" type="VBoxContainer" parent="Settings/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainerForInputModeOption" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/HBoxContainerForInputModeOption"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Input mode:"
+
+[node name="InputModeOption" type="OptionButton" parent="Settings/VBoxContainer/TabContainer/Controls/HBoxContainerForInputModeOption"]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 2
+item_count = 3
+popup/item_0/text = "Keyboard"
+popup/item_1/text = "Touchscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Mouse"
+popup/item_2/id = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+text = "Key binds:"
+
+[node name="HSeparator" type="HSeparator" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="KeybindSettings1" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "forward"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings1"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings2" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "backward"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings3" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "right"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings3"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings4" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "left"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings4"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings5" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings5"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "brake"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings5"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings5"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings5"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings5"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings6" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings6"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "pause"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings6"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings6"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings6"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings6"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings7" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings7"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "restart"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings7"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings7"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings7"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings7"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings8" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings8"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "quit"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings8"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings8"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings8"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings8"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="KeybindSettings9" type="HBoxContainer" parent="Settings/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+script = ExtResource("20_upc63")
+
+[node name="ActionName" type="Label" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings9"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "reverse"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings9"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button1" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings9"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action1"
+
+[node name="Button2" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings9"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action2"
+
+[node name="Button3" type="Button" parent="Settings/VBoxContainer/TabContainer/Controls/KeybindSettings9"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "action3"
+
+[node name="SaveAndReturnButton" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "save and return"
+
+[connection signal="pressed" from="Car/UI/Cheats/VBoxContainer/LevelLoader/SetlevelButton" to="Car/UI/Cheats" method="_on_setlevel_button_pressed"]
+[connection signal="pressed" from="Car/Controls/Forward" to="Car" method="_on_forward_pressed"]
+[connection signal="released" from="Car/Controls/Forward" to="Car" method="_on_forward_released"]
+[connection signal="pressed" from="Car/Controls/Back" to="Car" method="_on_back_pressed"]
+[connection signal="released" from="Car/Controls/Back" to="Car" method="_on_back_released"]
+[connection signal="pressed" from="Car/Controls/Left" to="Car" method="_on_left_pressed"]
+[connection signal="released" from="Car/Controls/Left" to="Car" method="_on_left_released"]
+[connection signal="pressed" from="Car/Controls/Right" to="Car" method="_on_right_pressed"]
+[connection signal="released" from="Car/Controls/Right" to="Car" method="_on_right_released"]
+[connection signal="pressed" from="Car/Controls/Break" to="Car" method="_on_break_pressed"]
+[connection signal="released" from="Car/Controls/Break" to="Car" method="_on_break_released"]
+[connection signal="pressed" from="Car/Controls/Pause" to="Car/Controls" method="_on_pause_pressed"]
+[connection signal="pressed" from="PauseMenu/MainGrid/ButtonContinue" to="PauseMenu" method="_on_button_continue_pressed"]
+[connection signal="pressed" from="PauseMenu/MainGrid/ButtonResume" to="PauseMenu" method="_on_button_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/MainGrid/ButtonRestart" to="PauseMenu" method="_on_button_restart_pressed"]
+[connection signal="pressed" from="PauseMenu/MainGrid/ButtonSettings" to="PauseMenu" method="_on_button_settings_pressed"]
+[connection signal="pressed" from="PauseMenu/MainGrid/ButtonMainMenu" to="PauseMenu" method="_on_button_main_menu_pressed"]
+[connection signal="item_selected" from="Settings/VBoxContainer/TabContainer/Controls/HBoxContainerForInputModeOption/InputModeOption" to="Settings" method="_on_input_mode_option_item_selected"]
+[connection signal="pressed" from="Settings/VBoxContainer/SaveAndReturnButton" to="Settings" method="_on_save_and_return_button_pressed"]

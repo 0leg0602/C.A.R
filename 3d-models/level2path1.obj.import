@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5jlo8c0lmjpt"
+path="res://.godot/imported/level2path1.obj-b1c283015896b73f3dcb2a81cbb60f63.mesh"
+
+[deps]
+
+files=["res://.godot/imported/level2path1.obj-b1c283015896b73f3dcb2a81cbb60f63.mesh"]
+
+source_file="res://3d-models/level2path1.obj"
+dest_files=["res://.godot/imported/level2path1.obj-b1c283015896b73f3dcb2a81cbb60f63.mesh", "res://.godot/imported/level2path1.obj-b1c283015896b73f3dcb2a81cbb60f63.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

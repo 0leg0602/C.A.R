@@ -1,0 +1,123 @@
+[gd_scene load_steps=11 format=3 uid="uid://batgvbcqxb75l"]
+
+[ext_resource type="Script" path="res://Scripts/Level3.gd" id="1_va5fh"]
+[ext_resource type="Texture2D" uid="uid://bifv05ee468j8" path="res://textures/chess.png" id="2_i0r60"]
+[ext_resource type="Theme" uid="uid://cotcbhb0703mf" path="res://Themes/PauseMenu.tres" id="18_8k4jm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u84qh"]
+radius = 4.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4dkp"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.470588)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.35
+rim_tint = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h21ns"]
+material = SubResource("StandardMaterial3D_r4dkp")
+top_radius = 4.3
+bottom_radius = 4.3
+height = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hpab"]
+albedo_texture = ExtResource("2_i0r60")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pw2q"]
+material = SubResource("StandardMaterial3D_7hpab")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ijixq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2oohj"]
+bg_color = Color(0, 0, 0, 0)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_va5fh")
+metadata/level_name = "level3"
+
+[node name="TimerGameOver" type="Timer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+wait_time = 40.0
+one_shot = true
+
+[node name="TimerFinish" type="Timer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+wait_time = 120.0
+one_shot = true
+
+[node name="OmniLightBulb" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+visible = false
+light_energy = 6.57
+omni_range = 167.767
+
+[node name="SpotLight1" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+spot_range = 6.72384
+
+[node name="Area3D" type="Area3D" parent="SpotLight1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42109e-14, -3.9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpotLight1/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_u84qh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpotLight1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 20.5)
+visibility_range_begin = 30.0
+mesh = SubResource("CylinderMesh_h21ns")
+
+[node name="ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("BoxMesh_8pw2q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("WorldBoundaryShape3D_ijixq")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_right = 43.5
+offset_bottom = 142.0
+grow_horizontal = 2
+
+[node name="TimeGameOverLable" type="Button" parent="UI/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("18_8k4jm")
+theme_override_colors/font_disabled_color = Color(1, 0, 0, 1)
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2oohj")
+disabled = true
+text = "123"
+
+[node name="TimeFinishLable" type="Button" parent="UI/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("18_8k4jm")
+theme_override_colors/font_disabled_color = Color(0, 1, 0, 1)
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2oohj")
+disabled = true
+text = "123"
+
+[connection signal="timeout" from="TimerGameOver" to="." method="_on_timer_game_over_timeout"]
+[connection signal="timeout" from="TimerFinish" to="." method="_on_timer_finish_timeout"]
+[connection signal="body_entered" from="SpotLight1/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="SpotLight1/Area3D" to="." method="_on_area_3d_body_exited"]

@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="C.A.R"
+config/version="0.7.0-alpha"
+run/main_scene="res://Scenes/Menu.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://textures/iconC.A.R.png"
+
+[autoload]
+
+global="*res://Scripts/global.gd"
+
+[display]
+
+window/size/viewport_width=0
+window/size/viewport_height=0
+window/size/mode=4
+window/size/initial_screen=1
+window/size/borderless=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+limits/opengl/max_renderable_lights=64
+limits/opengl/max_lights_per_object=26
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
