@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://245gp618f2jk"]
 
-[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_oyml1"]
+[ext_resource type="Script" uid="uid://chsmt4tno15wn" path="res://Scripts/Menu.gd" id="1_oyml1"]
 [ext_resource type="Theme" uid="uid://b1ebssvshg3qy" path="res://Themes/Menu.tres" id="2_7u5bu"]
-[ext_resource type="Script" path="res://Scripts/levels_scroll_container.gd" id="3_qfi84"]
+[ext_resource type="Script" uid="uid://bmfmy78y2ero2" path="res://Scripts/levels_scroll_container.gd" id="3_qfi84"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uaxlp"]
 
@@ -47,8 +47,8 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 0
 focus_mode = 0
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uaxlp")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_huc1d")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_dd1qi")

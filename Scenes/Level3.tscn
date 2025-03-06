@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://batgvbcqxb75l"]
 
-[ext_resource type="Script" path="res://Scripts/Level3.gd" id="1_va5fh"]
+[ext_resource type="Script" uid="uid://re3rauukvnqw" path="res://Scripts/Level3.gd" id="1_va5fh"]
 [ext_resource type="Texture2D" uid="uid://bifv05ee468j8" path="res://textures/chess.png" id="2_i0r60"]
 [ext_resource type="Theme" uid="uid://cotcbhb0703mf" path="res://Themes/PauseMenu.tres" id="18_8k4jm"]
 

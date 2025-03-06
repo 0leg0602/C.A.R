@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://dhgvje6umqvc0"]
 
-[ext_resource type="Script" path="res://Scripts/level4.gd" id="1_ogvru"]
+[ext_resource type="Script" uid="uid://dty2sjgytyof6" path="res://Scripts/level4.gd" id="1_ogvru"]
 [ext_resource type="Texture2D" uid="uid://cq4c088pf1qr7" path="res://textures/A&B.png" id="2_dutxp"]
 [ext_resource type="Texture2D" uid="uid://bifv05ee468j8" path="res://textures/chess.png" id="2_nk1jm"]
 [ext_resource type="Material" uid="uid://cejodv6vvwjst" path="res://textures/MainTexture.tres" id="2_rk187"]
@@ -116,8 +116,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ium3"]
 _data = {
-"Door1Disintegration": SubResource("Animation_h84vu"),
-"RESET": SubResource("Animation_hrksc")
+&"Door1Disintegration": SubResource("Animation_h84vu"),
+&"RESET": SubResource("Animation_hrksc")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3ckjd"]
@@ -203,7 +203,7 @@ spot_angle = 50.4685
 
 [node name="DoorsAnimation" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7ium3")
+&"": SubResource("AnimationLibrary_7ium3")
 }
 
 [node name="Door1" type="StaticBody3D" parent="."]

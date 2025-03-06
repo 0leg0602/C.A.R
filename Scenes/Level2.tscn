@@ -1,10 +1,10 @@
 [gd_scene load_steps=43 format=3 uid="uid://c6f4pkyess4ra"]
 
-[ext_resource type="Script" path="res://Scripts/Level2.gd" id="1_g257i"]
+[ext_resource type="Script" uid="uid://dgcvphqqjcl4t" path="res://Scripts/Level2.gd" id="1_g257i"]
 [ext_resource type="ArrayMesh" uid="uid://b5jlo8c0lmjpt" path="res://3d-models/level2path1.obj" id="2_62nk3"]
 [ext_resource type="Material" uid="uid://cejodv6vvwjst" path="res://textures/MainTexture.tres" id="2_jpbsf"]
 [ext_resource type="Texture2D" uid="uid://ettryw5upctl" path="res://textures/PlainArrow.png" id="4_r3rch"]
-[ext_resource type="Script" path="res://Scripts/RandomBarrier.gd" id="5_fb7wd"]
+[ext_resource type="Script" uid="uid://dk7i0r8bqdohy" path="res://Scripts/RandomBarrier.gd" id="5_fb7wd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8pw2q"]
 material = ExtResource("2_jpbsf")
@@ -435,8 +435,8 @@ tracks/15/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3wffb"]
 _data = {
-"PlatformMove": SubResource("Animation_mbl0s"),
-"RESET": SubResource("Animation_m4j7p")
+&"PlatformMove": SubResource("Animation_mbl0s"),
+&"RESET": SubResource("Animation_m4j7p")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2el63"]
@@ -535,8 +535,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_81jv2"]
 _data = {
-"RESET": SubResource("Animation_mweln"),
-"Show": SubResource("Animation_nsutx")
+&"RESET": SubResource("Animation_mweln"),
+&"Show": SubResource("Animation_nsutx")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j3ddj"]
@@ -899,7 +899,7 @@ spot_angle = 70.3125
 
 [node name="PlatformAnimation" type="AnimationPlayer" parent="CorrectWay"]
 libraries = {
-"": SubResource("AnimationLibrary_3wffb")
+&"": SubResource("AnimationLibrary_3wffb")
 }
 speed_scale = 0.5
 
@@ -917,8 +917,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.1)
 curve = SubResource("Curve3D_j25qp")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="CorrectWay/Path3D"]
-transform = Transform3D(0.999934, 0, 0, 0, 1, 0, 0, 0, 0.999934, 0.958753, 0, 149.374)
-progress = 149.377
+transform = Transform3D(0.999934, 0, 0, 0, 1, 0, 0, 0, 0.999934, 0, 0, 0)
 rotation_mode = 0
 
 [node name="Platform" type="AnimatableBody3D" parent="CorrectWay/Path3D/PathFollow3D"]
@@ -981,7 +980,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, 182.6)
 
 [node name="WallAnimation" type="AnimationPlayer" parent="CorrectWay/StaticWall3"]
 libraries = {
-"": SubResource("AnimationLibrary_81jv2")
+&"": SubResource("AnimationLibrary_81jv2")
 }
 
 [node name="Arrow1" type="Sprite3D" parent="CorrectWay/StaticWall3"]

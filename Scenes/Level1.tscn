@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://b6a5w6nr11p61"]
 
-[ext_resource type="Script" path="res://Scripts/Level1.gd" id="1_efaka"]
+[ext_resource type="Script" uid="uid://biku4er35e7qj" path="res://Scripts/Level1.gd" id="1_efaka"]
 [ext_resource type="Texture2D" uid="uid://ettryw5upctl" path="res://textures/PlainArrow.png" id="2_2ikme"]
 [ext_resource type="Texture2D" uid="uid://c1ph0r0se8plw" path="res://textures/Tile.svg" id="3_sbajh"]
 [ext_resource type="ArrayMesh" uid="uid://dbknctngpmx4x" path="res://3d-models/path.obj" id="4_0dpsq"]
